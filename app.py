@@ -1,5 +1,35 @@
 import streamlit as st
 import pandas as pd
+import json
+import os
+
+# Caminho do arquivo manifest.json
+manifest_path = "manifest.json"
+
+if os.path.exists(manifest_path):
+    with open(manifest_path, "r") as f:
+        manifest = json.load(f)
+    
+    # Monta as meta tags dinamicamente com todos os ícones do manifest
+    meta_tags = ""
+    for icon in manifest.get("icons", []):
+        sizes = icon.get("sizes", "")
+        src = icon.get("src", "")
+        if sizes and src:
+            meta_tags += f'<link rel="icon" type="image/png" sizes="{sizes}" href="{src}">\n'
+    
+    # Adiciona o apple-touch-icon (primeiro ícone como padrão)
+    if manifest.get("icons"):
+        apple_icon = manifest["icons"][0].get("src", "")
+        if apple_icon:
+            meta_tags = f'<link rel="apple-touch-icon" sizes="180x180" href="{apple_icon}">\n' + meta_tags
+
+    # Link para o manifest
+    meta_tags += f'<link rel="manifest" href="{manifest_path}">'
+
+    st.markdown(meta_tags, unsafe_allow_html=True)
+else:
+    st.warning("Arquivo manifest.json não encontrado.")
 
 st.markdown(
     """
@@ -64,6 +94,7 @@ if entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
 
 
