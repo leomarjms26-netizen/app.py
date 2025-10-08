@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(
+    page_title="Verificador de Portas",
+    page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1a.jpg"  # seu arquivo JPG
+)
+
 st.title("Verificador de Portas Disponíveis" )
 
 st.markdown(
@@ -49,6 +54,7 @@ if entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
 
 
