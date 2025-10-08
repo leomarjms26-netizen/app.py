@@ -3,7 +3,7 @@ import pandas as pd
 
 st.title("Verificador de Portas Disponíveis")
 
-entrada = st.text_input("Digite o identificador (ex: CB07-SP06-CX15)")
+entrada = st.text_input("Digite o identificador (ex: CB07-SP06-CX15)").upper()
 
 if entrada:
     try:
@@ -29,4 +29,5 @@ if entrada:
             st.error(f"❌ Nenhuma Porta disponível encontrada para: {entrada}\n📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040")
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
+
             st.dataframe(filtro)
