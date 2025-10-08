@@ -53,8 +53,9 @@ if buscar and entrada:
 
         if filtro.empty:
             st.error(
-            f"❌ Nenhuma Porta disponível encontrada para: {entrada} "\n"
-            f"📞 Ligue para atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp para ser redirecionado")
+            f"❌ Nenhuma Porta disponível encontrada para: {entrada}  \n"
+            f"📞 Ligue para Atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp para ser redirecionado"
+            )
             
             st.markdown(
                 "<a href='https://wa.link/xcmibx' target='_blank'>"
@@ -73,6 +74,7 @@ if buscar and entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
 
 
