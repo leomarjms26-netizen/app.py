@@ -52,7 +52,7 @@ if buscar and entrada:
         ]
 
         if filtro.empty:
-            st.markdown(
+            st.error(
             f"❌ Nenhuma Porta disponível encontrada para: {entrada}  \n"
             f"📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp para ser redirecionado",
             unsafe_allow_html=True)
@@ -74,4 +74,5 @@ if buscar and entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
