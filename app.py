@@ -32,11 +32,16 @@ if entrada:
 
         if filtro.empty:
             st.error(f"❌ Nenhuma Porta disponível encontrada para: {entrada}\n📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040")
-            st.markdown("[Whatsapp](https://wa.link/xcmibx)")
+            st.markdown(
+                "<a href='https://wa.link/xcmibx' target='_blank'>"
+                "<img src='https://logodownload.org/wp-content/uploads/2015/04/whatsapp-logo-2-1.png' width='40'></a>",
+                unsafe_allow_html=True
+            )
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
 
             st.dataframe(filtro)
+
 
 
 
