@@ -31,19 +31,21 @@ if os.path.exists(manifest_path):
 else:
     st.warning("Arquivo manifest.json não encontrado.")
 
+# Links fixos para fallback (usando PNG)
 st.markdown(
     """
-    <link rel="apple-touch-icon" sizes="180x180" href="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1a.jpg">
-    <link rel="icon" type="image/png" sizes="32x32" href="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1a.jpg">
-    <link rel="icon" type="image/png" sizes="16x16" href="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1a.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png">
     <link rel="manifest" href="manifest.json">
     """,
     unsafe_allow_html=True
 )
 
+# Atualiza o ícone da página
 st.set_page_config(
     page_title="Verificador de Portas",
-    page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1a.jpg"  # seu arquivo JPG
+    page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png"
 )
 
 st.title("Verificador de Portas Disponíveis" )
@@ -94,6 +96,7 @@ if entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
 
 
