@@ -1,6 +1,20 @@
 import streamlit as st
 import pandas as pd
 
+st.markdown(
+    """
+    <style>
+    #GithubIcon {
+        visibility: hidden;
+    }
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137, .viewerBadge_text__1JaDK {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Links fixos para fallback (usando PNG)
 st.markdown(
     """
@@ -73,6 +87,7 @@ if buscar and entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
 
 
