@@ -32,10 +32,12 @@ if entrada:
 
         if filtro.empty:
             st.error(f"❌ Nenhuma Porta disponível encontrada para: {entrada}\n📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040")
+            st.markdown("[Whatsapp](https://wa.link/xcmibx)")
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
 
             st.dataframe(filtro)
+
 
 
 
