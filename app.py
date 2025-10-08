@@ -1,21 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-# Define a cor de fundo RGB
-r, g, b = 37, 247, 93
-
-# Injeta CSS para mudar o background
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-color: rgb({r}, {g}, {b});
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.title("Verificador de Portas Disponíveis" )
 
 st.markdown(
@@ -51,6 +36,7 @@ if entrada:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
 
             st.dataframe(filtro)
+
 
 
 
