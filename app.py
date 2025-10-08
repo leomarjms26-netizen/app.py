@@ -39,8 +39,14 @@ if entrada:
             )
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
+            
+            # Seleciona apenas as colunas até 'capacidade'
+            colunas_ate_capacidade = filtro.loc[:, :"capacidade"]
+            
+            # Mostra o DataFrame sem índice lateral
+            st.dataframe(colunas_ate_capacidade.style.hide_index())
 
-            st.dataframe(filtro)
+
 
 
 
