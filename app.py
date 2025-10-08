@@ -3,7 +3,9 @@ import pandas as pd
 
 st.title("Verificador de Portas Disponíveis" )
 
-entrada = st.text_input("Digite o identificador (ex: CB07-SP06-CX15), \n Caso o Bairro for jaguaré, sempre sera o CB16").upper()
+st.write("Digite o identificador (ex: CB07-SP06-CX15)\nCaso o Bairro for Jaguaré, sempre será o CB16")
+
+entrada = st.text_input("", "").upper()
 
 if entrada:
     try:
@@ -31,5 +33,6 @@ if entrada:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
 
             st.dataframe(filtro)
+
 
 
