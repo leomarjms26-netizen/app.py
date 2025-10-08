@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import json
-import os
 
 # Links fixos para fallback (usando PNG)
 st.markdown(
@@ -14,22 +12,26 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Atualiza o ícone da página
 st.set_page_config(
     page_title="Verificador de Portas",
     page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png"
 )
 
-st.title("Verificador de Portas Disponíveis" )
+st.title("Verificador de Portas Disponíveis")
 
 st.markdown(
     "Digite o identificador (ex: CB07-SP06-CX15)  \n"
     "Observação: Caso o Bairro for Jaguaré, sempre será o CB16"
 )
 
+# Entrada de texto
 entrada = st.text_input("", "").upper()
 
-if entrada:
+# Botão de busca com lupa
+buscar = st.button("🔍 Buscar")
+
+# Executa a busca somente quando o botão é clicado
+if buscar and entrada:
     try:
         cabo_val, primaria_val, caixa_val = [x.strip() for x in entrada.split("-")]
     except ValueError:
@@ -68,22 +70,3 @@ if entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
