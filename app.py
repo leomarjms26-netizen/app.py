@@ -52,7 +52,11 @@ if buscar and entrada:
         ]
 
         if filtro.empty:
-            st.error(f"❌ Nenhuma Porta disponível encontrada para: {entrada}\n📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp para ser redirecionado")
+            st.markdown(
+            f"❌ Nenhuma Porta disponível encontrada para: {entrada}  \n"
+            f"📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp para ser redirecionado",
+            unsafe_allow_html=True)
+            
             st.markdown(
                 "<a href='https://wa.link/xcmibx' target='_blank'>"
                 "<img src='https://logodownload.org/wp-content/uploads/2015/04/whatsapp-logo-2-1.png' width='40'></a>",
@@ -70,3 +74,4 @@ if buscar and entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
