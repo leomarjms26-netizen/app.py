@@ -43,11 +43,13 @@ if entrada:
             # Seleciona apenas as colunas até 'CAPACIDADE'
             colunas_ate_capacidade = filtro.loc[:, :"CAPACIDADE"]
             
-            # Resetar o índice para evitar que o índice antigo apareça
-            colunas_ate_capacidade_reset = colunas_ate_capacidade.reset_index(drop=True)
+            # Cria um novo DataFrame sem índice
+            df_sem_indice = colunas_ate_capacidade.copy()
+            df_sem_indice.index = [""] * len(df_sem_indice)  # esconde o índice lateral
             
-            # Mostra o DataFrame
-            st.dataframe(colunas_ate_capacidade_reset)
+            # Mostra no Streamlit
+            st.table(df_sem_indice)
+
 
 
 
