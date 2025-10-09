@@ -73,7 +73,9 @@ if buscar and entrada:
             #df_sem_indice.index = [""] * len(df_sem_indice)  # esconde o índice lateral
             
             # Mostra no Streamlit
-            st.table(df_sem_indice)
+            #st.table(df_sem_indice)
+            st.table(filtro)
+
 
 
 
