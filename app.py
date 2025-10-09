@@ -70,10 +70,11 @@ if buscar and entrada:
             
             # Cria um novo DataFrame sem índice
             #df_sem_indice = colunas_ate_capacidade.copy()
-            df_sem_indice.index = [""] * len(df_sem_indice)  # esconde o índice lateral
+            #df_sem_indice.index = [""] * len(df_sem_indice)  # esconde o índice lateral
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
+
 
 
 
