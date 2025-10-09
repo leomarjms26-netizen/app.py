@@ -65,7 +65,10 @@ if buscar and entrada:
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
             
-            # Seleciona apenas as colunas até 'CAPACIDADE'
+           # Garante que a coluna "OBSERVAÇÃO" exista, mesmo que vazia
+            filtro["OBSERVAÇÃO"] = filtro.get("OBSERVAÇÃO", "")
+            
+            # Seleciona apenas as colunas até 'CAPACIDADE' + 'OBSERVAÇÃO'
             colunas_ate_capacidade = filtro.loc[:, list(filtro.loc[:, :"CAPACIDADE"].columns) + ["OBSERVAÇÃO"]]
             
             # Cria um novo DataFrame sem índice
@@ -74,19 +77,3 @@ if buscar and entrada:
             
             # Mostra no Streamlit
             st.table(df_sem_indice)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
