@@ -66,15 +66,16 @@ if buscar and entrada:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
             
             # Seleciona apenas as colunas até 'CAPACIDADE' + 'OBSERVAÇÃO'
-            #colunas_ate_capacidade = filtro.loc[:, :"CAPACIDADE"]
+            colunas_ate_capacidade = filtro.loc[:, :"CAPACIDADE"]
             
             # Cria um novo DataFrame sem índice
-            #df_sem_indice = colunas_ate_capacidade.copy()
-            #df_sem_indice.index = [""] * len(df_sem_indice)  # esconde o índice lateral
+            df_sem_indice = colunas_ate_capacidade.copy()
+            df_sem_indice.index = [""] * len(df_sem_indice)  # esconde o índice lateral
             
             # Mostra no Streamlit
-            #st.table(df_sem_indice)
-            st.table(filtro)
+            st.table(df_sem_indice)
+            #st.table(filtro)
+
 
 
 
