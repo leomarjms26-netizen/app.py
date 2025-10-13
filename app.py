@@ -18,7 +18,6 @@ st.set_page_config(
 )
 
 st.title("Verificador de Portas Disponíveis")
-
 st.markdown(
     "Digite o identificador (ex: CB07-SP06-CX15)  \n"
     "Observação: Caso o Bairro for Jaguaré, sempre será o CB16"
@@ -60,22 +59,22 @@ if buscar and entrada:
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
 
-            # Seleciona apenas as colunas até 'CAPACIDADE' + adiciona coluna nova
-            df_exibir = filtro.loc[:, :"CAPACIDADE"].copy()
-            df_exibir["ADICIONOU CLIENTE?"] = ""
+            # Pega apenas a primeira linha
+            row = filtro.iloc[0]
 
-            # Exibe cada linha com botões Sim/Não
-            for idx, row in df_exibir.iterrows():
-                cols = st.columns(len(df_exibir.columns))
-                for i, col_name in enumerate(df_exibir.columns):
-                    if col_name == "ADICIONOU CLIENTE?":
-                        if cols[i].button("Sim", key=f"sim_{idx}"):
-                            df_exibir.at[idx, col_name] = f"SIM - {datetime.now().strftime('%d/%m/%Y %H:%M')}"
-                        if cols[i].button("Não", key=f"nao_{idx}"):
-                            df_exibir.at[idx, col_name] = "NÃO"
-                    else:
-                        cols[i].write(row[col_name])
+            # Mostra as informações
+            st.write({
+                "CABO": row["CABO"],
+                "PRIMARIA": row["PRIMARIA"],
+                "CAIXA": row["CAIXA"],
+                "ID": row["ID"],
+                "PORTA": row["PORTA"],
+                "CAPACIDADE": row["CAPACIDADE"]
+            })
 
-            # Exibe a tabela final
-            st.write(df_exibir)
-
+            # Botões lado a lado
+            col1, col2 = st.columns(2)
+            if col1.button("Sim", key="sim"):
+                st.success(f"Cliente ADICIONADO em {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+            if col2.button("Não", key="nao"):
+                st.info("Cliente NÃO adicionado")
