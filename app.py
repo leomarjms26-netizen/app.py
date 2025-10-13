@@ -3,6 +3,7 @@ import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
+import json  # <-- importar json nativo
 
 # Configuração da página
 st.set_page_config(page_title="Verificador de Portas", page_icon="🔌")
@@ -16,7 +17,8 @@ buscar = st.button("🔍 Buscar")
 # Conectar ao Google Sheets via secret
 try:
     cred_json = st.secrets["google_sheets"]["cred_json"]
-    creds = Credentials.from_service_account_info(pd.io.json.loads(cred_json))
+    cred_dict = json.loads(cred_json)  # <-- corrige aqui
+    creds = Credentials.from_service_account_info(cred_dict)
     gc = gspread.authorize(creds)
 
     # Abra a planilha pelo link
