@@ -1,15 +1,33 @@
 import streamlit as st
 import pandas as pd
 import gspread
-import os
-import json
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
-# ==========================
-# CONFIGURAÇÕES INICIAIS
-# ==========================
-st.set_page_config(page_title="Verificador de Portas", page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png")
+# ========================================
+# Conexão com o Google Sheets
+# ========================================
+# Caminho para o seu arquivo JSON baixado
+CRED_PATH = "credenciais.json"
+
+# Escopos necessários
+scope = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
+# Carrega credenciais e autoriza
+creds = Credentials.from_service_account_file(CRED_PATH, scopes=scope)
+gc = gspread.authorize(creds)
+
+# URL da planilha
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1PLSVD3VxmgfWKOyr3Z700TbxCIZr1sT8IlOiSIvDvxM/edit#gid=0"
+sh = gc.open_by_url(SHEET_URL)
+worksheet = sh.sheet1  # pega a primeira aba, ajuste se precisar
+
+# ========================================
+# Interface Streamlit
+# ========================================
 
 st.markdown(
     """
@@ -21,53 +39,39 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.set_page_config(
+    page_title="Verificador de Portas",
+    page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png"
+)
+
 st.title("Verificador de Portas Disponíveis")
-st.markdown("Digite o identificador (ex: CB07-SP06-CX15)  \nObservação: Caso o Bairro for Jaguaré, sempre será o CB16")
+st.markdown(
+    "Digite o identificador (ex: CB07-SP06-CX15)  \n"
+    "Observação: Caso o Bairro for Jaguaré, sempre será o CB16"
+)
 
-# ==========================
-# CONEXÃO COM GOOGLE SHEETS
-# ==========================
-try:
-    creds_json = os.environ.get("GOOGLE_CRED_JSON")
-    creds_dict = json.loads(creds_json)
-    scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-    creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
-    gc = gspread.authorize(creds)
-
-    # Conecta à planilha
-    sheet_url = "https://docs.google.com/spreadsheets/d/1PLSVD3VxmgfWKOyr3Z700TbxCIZr1sT8IlOiSIvDvxM/edit#gid=0"
-    sh = gc.open_by_url(sheet_url)
-    worksheet = sh.sheet1
-except Exception as e:
-    st.error(f"Erro ao conectar ao Google Sheets: {e}")
-
-# ==========================
-# BUSCA DE PORTAS
-# ==========================
+# Entrada de texto
 entrada = st.text_input("", "").upper()
 buscar = st.button("🔍 Buscar")
 
+# Executa busca
 if buscar and entrada:
     try:
         cabo_val, primaria_val, caixa_val = [x.strip() for x in entrada.split("-")]
     except ValueError:
         st.error("❌ Formato inválido. Use: CB01-SP01-CX01")
     else:
-        # Lê os dados da planilha
-        df = pd.DataFrame(worksheet.get_all_records())
-        df.columns = [col.strip().upper().replace(" ", "_") for col in df.columns]
+        # Pega dados da planilha
+        data = worksheet.get_all_records()
+        df = pd.DataFrame(data)
 
-        # Verifica se colunas esperadas existem
-        colunas_esperadas = ["CABO", "PRIMARIA", "CAIXA", "PORTA", "OCUPADA", "ADICIONOU_CLIENTE"]
-        for col in colunas_esperadas:
-            if col not in df.columns:
-                st.error(f"⚠️ Coluna ausente na planilha: {col}")
-                st.stop()
+        # Se colunas não existirem, adiciona
+        if "ADICIONOU_CLIENTE" not in df.columns:
+            df["ADICIONOU_CLIENTE"] = ""
+        if "OCUPADA" not in df.columns:
+            df["OCUPADA"] = ""
 
-        # Filtro das portas disponíveis
+        # Filtra portas disponíveis
         filtro = df[
             (df["CABO"].astype(str).str.upper().str.strip() == cabo_val.upper()) &
             (df["PRIMARIA"].astype(str).str.upper().str.strip() == primaria_val.upper()) &
@@ -77,8 +81,8 @@ if buscar and entrada:
 
         if filtro.empty:
             st.error(
-                f"❌ Nenhuma Porta disponível encontrada para: {entrada}  \n"
-                f"📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp"
+                f"❌ Nenhuma Porta disponível encontrada para: \n{entrada}  \n"
+                f"📞 Ligue para o TI para Atualizar a Caixa: (11) 94484-7040 ou Clique no Ícone do Whatsapp para ser redirecionado"
             )
             st.markdown(
                 "<a href='https://wa.link/xcmibx' target='_blank'>"
@@ -87,23 +91,28 @@ if buscar and entrada:
             )
         else:
             st.success(f"🟢 Portas Disponíveis para: {entrada}")
-            st.table(filtro[["CABO", "PRIMARIA", "CAIXA", "PORTA"]])
 
-            # --- Adicionou Cliente? ---
-            st.markdown("### Adicionou Cliente?")
+            # Exibe tabela
+            colunas_ate_capacidade = filtro.loc[:, :"CAPACIDADE"]
+            df_sem_indice = colunas_ate_capacidade.copy()
+            df_sem_indice.index = [""] * len(df_sem_indice)
+            st.table(df_sem_indice)
+
+            # Botão SIM / NÃO
             col1, col2 = st.columns(2)
+            adicionou_cliente = None
             with col1:
-                sim = st.button("✅ SIM")
+                if st.button("SIM", key="sim"):
+                    adicionou_cliente = "SIM"
             with col2:
-                nao = st.button("❌ NÃO")
+                if st.button("NÃO", key="nao"):
+                    adicionou_cliente = "NÃO"
 
-            if sim:
-                agora = datetime.now().strftime("%d/%m/%Y %H:%M")
-                # Atualiza a primeira linha correspondente no Google Sheets
-                idx = filtro.index[0] + 2  # +2 porque planilhas começam na linha 2
-                worksheet.update_acell(f"K{idx}", f"SIM, {agora}")  # Coluna ADICIONOU_CLIENTE
-                worksheet.update_acell(f"I{idx}", "SIM")  # Coluna OCUPADA
-                st.success("✅ Cliente adicionado e planilha atualizada com sucesso!")
-
-            elif nao:
-                st.info("Nenhuma alteração realizada.")
+            # Atualiza planilha se SIM
+            if adicionou_cliente == "SIM":
+                now = datetime.now().strftime("%d/%m/%Y %H:%M")
+                # pega índices da tabela filtrada
+                for idx in filtro.index:
+                    worksheet.update_cell(idx + 2, df.columns.get_loc("ADICIONOU_CLIENTE") + 1, f"SIM, {now}")
+                    worksheet.update_cell(idx + 2, df.columns.get_loc("OCUPADA") + 1, "SIM")
+                st.success("✅ Planilha atualizada com sucesso!")
