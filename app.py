@@ -37,7 +37,7 @@ if buscar and entrada:
         df = pd.read_excel(url)
         df.columns = [
             "CABO", "PRIMARIA", "CAIXA", "ID", "PORTA", "CAPACIDADE",
-            "INTERFACE", "DATA_DE_ATUALIZACAO", "OCUPADA", "OBSERVACAO"
+            "INTERFACE", "DATA_DE_ATUALIZACAO", "OCUPADA", "OBSERVACAO", "ADICINOU_CLIENTE"
         ]
 
         filtro = df[
@@ -78,3 +78,4 @@ if buscar and entrada:
 
             # Exibe a tabela final
             st.write(df_exibir)
+
