@@ -5,6 +5,17 @@ import gspread
 from google.oauth2.service_account import Credentials
 import json
 
+# Carrega credenciais do Streamlit Secrets
+cred_json = st.secrets["google_sheets"]["cred_json"]
+cred_dict = json.loads(cred_json)
+creds = Credentials.from_service_account_info(cred_dict, scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"])
+gc = gspread.authorize(creds)
+
+# Use o ID da planilha
+SHEET_ID = "1PLSVD3VxmgfWKOyr3Z700TbxCIZr1sT8IlOiSIvDvxM"
+sh = gc.open_by_key(SHEET_ID)
+worksheet = sh.sheet1
+
 # --- Configurações Streamlit ---
 st.set_page_config(page_title="Verificador de Portas", page_icon="c64a4e55-0ce2-40c5-9392-fdc6f50f8b1aPNG.png")
 st.title("Verificador de Portas Disponíveis")
@@ -88,3 +99,4 @@ if buscar and entrada:
                         worksheet.update_cell(idx + 2, df.columns.get_loc("ADICIONOU_CLIENTE") + 1,
                                               df.at[idx, "ADICIONOU_CLIENTE"])
                         worksheet.update_cell(idx + 2, df.columns.get_loc("OCUPADA") + 1, "SIM")
+
