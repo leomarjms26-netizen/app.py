@@ -41,7 +41,7 @@ if buscar and entrada:
         df = pd.read_excel(url)
         df.columns = [
             "CABO", "PRIMARIA", "CAIXA", "ID", "PORTA", "CAPACIDADE",
-            "INTERFACE", "DATA_DE_ATUALIZACAO", "OCUPADA", "OBSERVACAO"
+            "INTERFACE", "DATA_DE_ATUALIZACAO", "OCUPADA", "OBSERVACAO", "ADICIONOU_CLIENTE"
         ]
 
         filtro = df[
@@ -75,3 +75,4 @@ if buscar and entrada:
             # Mostra no Streamlit
             st.table(df_sem_indice)
             #st.table(filtro)
+
