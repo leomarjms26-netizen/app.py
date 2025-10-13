@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "arched-jigsaw-475014-p4",
+  "private_key_id": "e4f79968b315eaba96907042b3465d25ac401c0b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDP5EdCTkX8neDo\nKg5SAo0tN/g0B0fQshTyNwu+Qjh+CaAu12Mg2NhFEIGg9+vpEs4ZCyyFdexR3LtN\nDeR52xzO253K+ePWW3Y0oD4xK4jT/S3mdbAusEEL3SajTnGmURp0BxzVSNWpu5iw\n+32GA7Pak5VbhZ8MjVFKbq+tKMhUL8xEIE3Lh3CbnWXAC8m8p2Vl67USJWl960IO\nzBeGHww72OgE0Ubv//4jgt10N4ezmMQs5iZdQALGZldnCXHf6OYs89M5W0CUSzTy\nPsRpiJymw3gb61wxlD2eT2fjw7nbdkL4RJtHzkU1wz7XNB43IOhBnpU+1GJhSyPv\nV3KaDAixAgMBAAECggEAMyliUhKSTbuK7IfhE1S2arDx/9fk2BrjZcKfPLjuTzJO\nPgjax+wluUV5KWSqJadvmiEyWTvupyzT2YA4QLboTY4ltJyv8gJ7QjNHavFkUItn\nvuYqsCrHL0TDLABznrMp9/ECKwksMAPPbYrO1urVWc7lPGtTe5LRtSgtSseVGYZi\nAwp4hAxv+39/vyLSQg9BKpo6G4zgSeId4WJZYtVtW7njezSOESPY4AyDOpdyJ4NU\nbTux4IlRHigTEoApo+y0MOTkl6JbU7vghw3LtVwrunq3tPBJUMbNMMIqwHHX+hmS\nWA8joGIeB5vSVPAUddLqZWhis+1boV5HVHnn5Ld0swKBgQD3XHlTe67RU2srymcn\nl05UX57e4b6AIzNOLGGsp7XAxXAIz95Zyw3MhvNt3DV3SzaeNd5dkDClw0L0WzgN\nfep7jrLOAK5MEoi5bmDTS7+qElZhe1INOg6vD94pSfpBUQGMJmAur5tkDWb3aG4h\nMvHe6RaHFxOA10TYisL+jyFJTwKBgQDXJu2oQCo025a4KvMsHJwh3BS3Tf8fqHi8\ndSM9oxtJRQrM0zCB5gVT8AMJ/fpzBj5rkqqgdRNWQki1Hy2+gW6LzFKZdFda7krz\nRj6kG7s7eNMdMCp7gxpSls0vm3vdB9sj8wjNE0dC3445DlddzPMG5XWJyhKlvF+p\nXrwtJWUN/wKBgQDYpTZh5sai8VPBA8G7DCr/fMwRW1fUtH+/7OETLcPi9Ul9fkm5\nDT2lr2BPDPoK5GYOxRFfkuT4mX7vs2DxeCHBW6bBBBmj6Ou0tLa6+PICC5N6R18C\n1KF9tAEY2oEDaeZYEFhXK1iGlbJj6CPkkdEDMdSYNp7PTjsvCMFl4If/wwKBgQCT\nGBRHgYbZmH+U7hhOwkikhZjMMdEIzd+tyNANJeRT1ZYqrwBs7twZpPAO9ssxtMUc\nOqvZA/HyeWLIIcbehhMUFN8r9vR6QIyRgib1f9gkMtjzDakdxGZMrLkfoUevt91E\n2LXdrx57Q+gybfGhOau1vU78o2DYWs90Nkak/vn19QKBgQC/hjiOxLu4TULBgbt2\nsLbrBTnowHxGJXe/bwZGz1ZvDQi1/xQ7vzIQ+5WRlzLosVR+kRYpLtk5kiB+A7da\nUoEWei9lIHqzY0qitOMtBtReedPr3gx43Vu2RqTmDy5ZCfbvEazPtuOcV4HRjUNj\nBdwjGP/9iS96+48D3H2EU2selA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "streamlit-app@arched-jigsaw-475014-p4.iam.gserviceaccount.com",
+  "client_id": "105401541226848768558",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/streamlit-app%40arched-jigsaw-475014-p4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
