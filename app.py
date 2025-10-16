@@ -71,8 +71,9 @@ st.set_page_config(
 )
 
 st.title("Verificador de Portas Disponíveis")
+
 st.markdown(
-    "Digite o identificador (ex: CB07-SP06-CX15) \n"
+    "Digite o identificador (ex: CB07-SP06-CX15)  \n"
     "Observação: Caso o Bairro for Jaguaré, sempre será o CB16"
 )
 
@@ -135,3 +136,4 @@ if buscar and entrada:
                 """,
                 unsafe_allow_html=True
             )
+
